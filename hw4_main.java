@@ -54,33 +54,39 @@ public class hw4_main {
             else  {
                 list_gender.add("false");
             }
-            linkedlist.add(list_age.size() - 1); // записываем значение текущего индекса-связи
-            System.out.println("Хотите ввести еще одну персону? Y/N");
+            linkedlist.add(list_age.size() - 1); // записываем значение текущего индекса-связи 
+            // (при этом зацепиться можно за любой список, не только возраста)
+            System.out.println("Хотите ввести еще одну персону? Y/N"); // проверяем будет ли еще записи
             Scanner scanner1 = new Scanner(System.in);
             String yn = scanner1.nextLine();
-            if(yn.toUpperCase().equals("N")) {
+            if(yn.toUpperCase().equals("N")) { // запуск (или незапуск) ветки цикла
                 flag = false;
             }
         }
+        // сортировать пользователей по возрасту
 
-        int cnt = list_age.size()-1;
-        while (cnt > -1) {
-            int max_age = list_age.get(linkedlist.get(cnt));
-            int index = cnt;
-            for (int i = 0; i < cnt; i++){
+        int cnt = list_age.size()-1; // определяем размер счетчика
+        while (cnt > -1) { // запускаем перебор
+            int max_age = list_age.get(linkedlist.get(cnt)); // задаем начальное значение мах возраста
+            int index = cnt; // получаем начальний индекс мах возраста
+            for (int i = 0; i < cnt; i++){ // ищем реальный мах возраста
                 if (max_age < list_age.get(linkedlist.get(i))){
-                    max_age = list_age.get(linkedlist.get(i));
-                    index = i;
+                    max_age = list_age.get(linkedlist.get(i)); // находим текущий мах возраста
+                    index = i; // и его индекс
                 }
             }
             int tmp = linkedlist.get(cnt);
-            linkedlist.set(cnt, linkedlist.get(index));
+            linkedlist.set(cnt, linkedlist.get(index)); // передвигаем значение мах в конец списка
             linkedlist.set(index, tmp);
 
             cnt--;
         }
-        linkedlist.forEach(i ->
-        System.out.println(list_fname.get(i)+list_lname.get(i)+list_tname.get(i)+list_age.get(i)+list_gender.get(i)));
+        linkedlist.forEach(i -> // выводим списки 
+        System.out.println(list_fname.get(i)+" "+
+                            list_lname.get(i)+" " +
+                            list_tname.get(i)+" " +
+                            list_age.get(i)+" "+
+                            list_gender.get(i)));
         
     }
 }
